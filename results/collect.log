@@ -1,0 +1,28 @@
+[skip] flask already present
+[skip] click already present
+[skip] requests already present
+[skip] rich already present
+[skip] httpx already present
+[skip] attrs already present
+[ok] django @ 50eef95591 expected BSD-3-Clause; license files: ['LICENSE', 'LICENSE.python']
+[ok] numpy @ 25f19ce3ef expected BSD-3-Clause; license files: ['LICENSE.txt']
+[ok] pandas @ 5cb825427c expected BSD-3-Clause; license files: ['LICENSE', 'LICENSES']
+[ok] scikit-learn @ bbf8863a86 expected BSD-3-Clause; license files: ['COPYING']
+[ok] scipy @ 38be1fd951 expected BSD-3-Clause; license files: ['LICENSE.txt', 'LICENSES_bundled.txt']
+[ok] sympy @ 2d283a82d1 expected BSD-3-Clause; license files: ['LICENSE']
+[ok] matplotlib @ 825479c5c8 expected PSF-based-BSD-compatible; license files: ['LICENSE']
+[ok] pytest @ 2887015cad expected MIT; license files: ['LICENSE']
+[ok] black @ a7c2368b7e expected MIT; license files: ['LICENSE']
+[ok] fastapi @ 33d411dbc3 expected MIT; license files: ['LICENSE']
+[ok] jinja @ 5ef70112a1 expected BSD-3-Clause; license files: ['LICENSE.txt']
+[ok] werkzeug @ f7e37f0bf5 expected BSD-3-Clause; license files: ['LICENSE.txt']
+[ok] sqlalchemy @ 36e47d3a28 expected MIT; license files: ['LICENSE']
+[ok] pydantic @ e99ab58208 expected MIT; license files: ['LICENSE']
+[ok] celery @ 351ea6dcb8 expected BSD-3-Clause; license files: ['LICENSE']
+[ok] aiohttp @ d60a88e283 expected Apache-2.0; license files: ['LICENSE.txt']
+[ok] starlette @ 63c5760d8a expected BSD-3-Clause; license files: ['LICENSE.md']
+[ok] networkx @ 92f497e2eb expected BSD-3-Clause; license files: ['LICENSE.txt']
+[ok] scrapy @ 6fdac2f120 expected BSD-3-Clause; license files: ['LICENSE']
+[ok] tornado @ 57ac91bfd6 expected Apache-2.0; license files: ['LICENSE']
+[ok] pillow @ 9d30729003 expected HPND; license files: ['LICENSE']
+[ok] poetry @ d4fd21e471 expected MIT; license files: ['LICENSE']

@@ -1,0 +1,6 @@
+# pip install -r requirements.txt   (Kaggle already ships torch/numpy; pin exact versions in results/run_metadata after the real run)
+numpy>=1.26
+tokenizers>=0.19
+datasketch>=1.6
+torch>=2.2
+matplotlib>=3.8
