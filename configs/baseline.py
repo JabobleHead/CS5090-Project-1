@@ -23,10 +23,11 @@ weight_decay = 0.1
 beta2 = 0.99
 
 # eval / checkpointing (always keep the LAST checkpoint so baseline and ablation are compared at the same step)
-eval_interval = 200
-eval_iters = 100
+eval_interval = 300         # divides max_iters, so the final iteration is evaluated; ~29 curve points
+eval_iters = 40             # batches per split per eval (an eval of 100 took ~110 s on a T4, i.e. 1.3 h over the run)
 log_interval = 50
 always_save_checkpoint = True
 
 seed = 1337
+dtype = 'float16'           # explicit: a T4 reports bf16 as "supported" but only emulates it (slow); fp16 + GradScaler is native
 compile = False             # set True on Kaggle if torch.compile works (faster); does not change the math

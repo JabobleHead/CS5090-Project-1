@@ -9,7 +9,7 @@ Stages (counts are printed and written to data/processed/stats.json for DATASHEE
   6. split BY FILE PATH HASH: 90% train / 5% val / 5% test. Dedup runs BEFORE the split so
      near-duplicates cannot straddle train/val.
 """
-import ast, hashlib, json, re, warnings
+import ast, hashlib, json, platform, re, warnings
 from pathlib import Path
 from datasketch import MinHash, MinHashLSH
 
@@ -43,13 +43,15 @@ def main():
             continue
         stats["found"] += 1
         raw = p.read_bytes()
-        if not MIN_B <= len(raw) <= MAX_B:
-            stats["size_rejected"] += 1
-            continue
         try:
-            text = raw.decode("utf-8")
+            # normalise line endings: Windows git (core.autocrlf) checks files out as CRLF, Linux as LF; without this
+            # the same commit would yield different corpora/tokenizers on different machines
+            text = raw.decode("utf-8").replace("\r\n", "\n").replace("\r", "\n")
         except UnicodeDecodeError:
             stats["not_utf8"] += 1
+            continue
+        if not MIN_B <= len(text.encode("utf-8")) <= MAX_B:  # size rule applied on the normalised text
+            stats["size_rejected"] += 1
             continue
         try:
             ast.parse(text)
@@ -74,6 +76,7 @@ def main():
     for rel, text in kept:
         files[split_of(rel)].append({"path": rel, "text": text})
     stats["kept"] = len(kept)
+    stats["python_version"] = platform.python_version()  # ast.parse accepts different syntax per version (affects syntax_error)
     for s, rows in files.items():
         with open(OUT / f"{s}.jsonl", "w", encoding="utf-8") as f:
             for r in rows:
