@@ -40,6 +40,7 @@ def main():
     ap.add_argument("--temperature", type=float, default=0.2)
     ap.add_argument("--top_k", type=int, default=50)
     ap.add_argument("--seed", type=int, default=1337)
+    ap.add_argument("--no_indent_fix", dest="indent_fix", action="store_false", help="end prompt at a bare newline (first, flawed attempt)")
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     a = ap.parse_args()
 
@@ -54,18 +55,25 @@ def main():
     with open(a.out, "w", encoding="utf-8") as f:
         for i, r in enumerate(rows):
             torch.manual_seed(a.seed + i)
-            ids = torch.tensor([tok.encode(r["prompt"]).ids], dtype=torch.long, device=a.device)
+            # Tokenizer-boundary fix: in training text "\n" + indentation + word is tokenised as one merged whitespace
+            # token ("\n" + all-but-one indent chars) followed by " word"; a bare "\n" token almost always precedes a
+            # column-0 line. So end the prompt with indent[:-1], exactly as the training data would. Only whitespace
+            # from the reference's first line is used, never any of its code.
+            first = next(l for l in r["reference_body"].splitlines() if l.strip())
+            indent = first[:len(first) - len(first.lstrip())]
+            lead = indent[:-1] if a.indent_fix else ""
+            ids = torch.tensor([tok.encode(r["prompt"] + lead).ids], dtype=torch.long, device=a.device)
             with torch.no_grad():
                 gen = model.generate(ids, a.max_new_tokens, temperature=a.temperature, top_k=a.top_k)[0].tolist()
             new = gen[ids.size(1):]
             if eot in new:
                 new = new[:new.index(eot)]
-            completion = cut_completion(tok.decode(new))
+            completion = cut_completion(lead + tok.decode(new))
             rec = {"id": r["id"], "prompt": r["prompt"], "completion": completion,
                    # an empty completion must not count: a signature+docstring alone is already valid Python
                    "parses": bool(completion.strip()) and parses(r["prompt"] + completion),
                    "settings": {"temperature": a.temperature, "top_k": a.top_k, "max_new_tokens": a.max_new_tokens,
-                                "seed": a.seed + i, "ckpt": a.ckpt}}
+                                "seed": a.seed + i, "ckpt": a.ckpt, "indent_fix": a.indent_fix}}
             f.write(json.dumps(rec) + "\n")
             print(f"{r['id']}: parses={rec['parses']} ({len(completion.splitlines())} lines)")
 

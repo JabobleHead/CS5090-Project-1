@@ -1,21 +1,21 @@
-id,decision,edit_needed,minutes_to_check,notes
-p2-01,,,,
-p2-02,,,,
-p2-03,,,,
-p2-04,,,,
-p2-05,,,,
-p2-06,,,,
-p2-07,,,,
-p2-08,,,,
-p2-09,,,,
-p2-10,,,,
-p2-11,,,,
-p2-12,,,,
-p2-13,,,,
-p2-14,,,,
-p2-15,,,,
-p2-16,,,,
-p2-17,,,,
-p2-18,,,,
-p2-19,,,,
-p2-20,,,,
+id,decision,minutes_to_check,notes
+p2-01,reject,5,It does not compute the symmetric difference between the two arrays
+p2-02,reject,10,It never calls a logging method such as info
+p2-03,reject,4,References undefined arg and output; no commands or pipeline; compares string to list.
+p2-04,reject,3,Unterminated repetitive docstring; no superclass initialization or rule compilation.
+p2-05,reject,4,Invalid duplicated keywords and incomplete call; does not test redirect middleware.
+p2-06,reject,3,Repeated class definitions and truncated syntax; no OrderedDict serialization assertions.
+p2-07,reject,4,Incomplete code with undefined n_samples; does not test init_zero_coef.
+p2-08,reject,5,Constructs nodes.Call with unsupported name keyword and omits method attribute and dynamic arguments.
+p2-09,reject,2,Only repeated comments; no lossless WebP save or assertions.
+p2-10,reject,3,Unterminated docstring; never raises exception or calls start_response.
+p2-11,reject,5,Unrelated Pydantic model test; never tests Django HStoreField change detection.
+p2-12,reject,3,Malformed decorator and repeated argument names; never invokes Celery daemon command.
+p2-13,reject,4,Truncated syntax and wrong input types; never invokes sanitized_lines.
+p2-14,reject,3,Unterminated docstring; initializes none of the form parser state.
+p2-15,reject,4,Truncated duplicate methods; does not return a generated initializer.
+p2-16,reject,4,Unrelated pandas HDF code with undefined fixture; never tests FastAPI empty router.
+p2-17,reject,3,Malformed repeated type annotations; does not render escaped HTML segments.
+p2-18,reject,3,Truncated assertion and incorrect dmp_permute arguments; no valid permutation test.
+p2-19,reject,3,Unterminated docstring; does not initialize polygon interactor or event handlers.
+p2-20,reject,5,Returns unconnected pending Future; never propagates Deferred success or failure.

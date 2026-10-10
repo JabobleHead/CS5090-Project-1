@@ -5,3 +5,5 @@ out*/
 *.pt
 __pycache__/
 .venv/
+*.zip
+data/processed_local_backup/

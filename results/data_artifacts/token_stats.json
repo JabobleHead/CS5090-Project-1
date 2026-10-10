@@ -1,0 +1,17 @@
+{
+  "train": {
+    "tokens": 47778474,
+    "chars": 163953861,
+    "chars_per_token": 3.432
+  },
+  "val": {
+    "tokens": 2856401,
+    "chars": 9802740,
+    "chars_per_token": 3.432
+  },
+  "test": {
+    "tokens": 2372921,
+    "chars": 7949598,
+    "chars_per_token": 3.35
+  }
+}

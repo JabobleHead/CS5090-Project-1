@@ -1,0 +1,17 @@
+{
+  "found": 15439,
+  "size_rejected": 1917,
+  "not_utf8": 0,
+  "syntax_error": 14,
+  "generated_or_minified": 29,
+  "exact_dup": 31,
+  "near_dup": 111,
+  "kept": 13337,
+  "python_version": "3.13.15",
+  "train_files": 12012,
+  "train_chars": 163953861,
+  "val_files": 677,
+  "val_chars": 9802740,
+  "test_files": 648,
+  "test_chars": 7949598
+}

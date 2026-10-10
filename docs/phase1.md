@@ -51,10 +51,19 @@ See the [README](../README.md) for commands and [kaggle_guide.md](kaggle_guide.m
 - Single seed per configuration; differences smaller than run-to-run noise are not conclusions.
 - Licences (BSD-3, MIT, Apache-2.0, HPND, PSF-style) permit use with notice. Training a model on them is not the same as redistributing the code, but verbatim reproduction by the model (Phase 3 `memorised` failures) would need attribution. Confirm each LICENSE file by reading it; `collect.py` only checks that one exists.
 
-## 7. Results (fill in after the runs)
+## 7. Results
 | Run | Final train loss | Final val loss | Best val (iter) | GPU / time | dtype |
 |---|---|---|---|---|---|
-| Baseline | TODO | TODO | TODO | TODO | TODO |
-| No position embeddings | TODO | TODO | TODO | TODO | TODO |
+| Baseline | 1.551 | **1.7128** | 1.7120 (8100) | Tesla T4 / ~40 min training (~272 ms/iter) | float16 + GradScaler |
+| No position embeddings | TODO | TODO | TODO | TODO | float16 |
 
-Figures: `results/loss_curves.png`. Side-by-side generations: `results/gen_baseline.txt`, `results/gen_nopos.txt`.
+Baseline run facts (`results/baseline_loss.csv`, `baseline_run_metadata.json`): repo commit `77b99ed`, Python 3.13.15, torch 2.11.0+cu128, seed 1337, 8,400 iterations (~275 M tokens, ~5.8 passes over 47.8 M train tokens), start loss 9.08 (= ln 8192, as expected).
+How to read it: val loss falls fast (9.08 -> 2.46 by iter 900), then slowly; it flattens after ~iter 7,500 (1.714 at 7,500 vs 1.713 at 8,400) as the learning rate decays, and the train/val gap is 0.16 nats. That is mild overfitting from repeated passes, not divergence; the last checkpoint is within 0.001 of the best, so final-vs-best makes no practical difference here.
+Caveats: single seed; each logged loss is an average over only 40 batches (~1.3 M tokens), so differences below roughly 0.01-0.02 nats are not interpretable.
+
+Figures: `results/loss_curves.png`. Side-by-side generations: `results/gen_baseline.txt`, `results/gen_nopos.txt` (after the ablation).
+
+### Deviations actually made (for the report)
+- `dtype=float16` fixed in the config. The first attempt used nanoGPT's default, which picked bfloat16 on the T4 (reported as supported, but emulated): 1.58 s/iter vs 0.27 s/iter with float16.
+- Eval every 300 iterations with 40 batches (was 200 / 100) to cut eval time; this does not change training.
+- A smoke-test cell crashed once (warmup equal to lr-decay iterations in the 200-iteration override: division by zero); fixed in the notebook, the full run was unaffected.
