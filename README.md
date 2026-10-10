@@ -55,13 +55,13 @@ scripts/            data pipeline, sampling, plotting, Phase 2 tooling
 Not in git (rebuilt by the scripts): `data/raw/`, `data/processed/`, `data/code/*.bin`, checkpoints (`out-*/`).
 
 ## Status
-- [x] Data pipeline run end to end (13,369 files; 47,653,184 train tokens)
+- [x] Data pipeline run end to end (13,337 files; 47,778,474 train tokens, Kaggle build)
 - [x] Both configs smoke-tested on CPU; parameter counts verified
 - [x] Ablation prediction written and committed
 - [x] Phase 2 inputs generated (20 functions from 20 repos); runner and summary dry-run tested
-- [ ] Baseline trained on Kaggle  ← **next step**, see [docs/kaggle_guide.md](docs/kaggle_guide.md)
-- [ ] Ablation trained and compared (val loss + side-by-side generation)
-- [ ] Phase 2: run model, judge 20 outputs by hand
+- [x] Baseline trained on Kaggle (T4, ~40 min): final val loss **1.7128**, train 1.551; `results/baseline_loss.csv`, `results/loss_curves.png`
+- [ ] Ablation trained and compared (val loss + side-by-side generation) <- **next step**: rerun the notebook with `RUN='ablation_nopos'` (see [docs/kaggle_guide.md](docs/kaggle_guide.md))
+- [x] Phase 2: 20 outputs generated and judged by hand: 0 accept / 0 edit / 20 reject (`phase2/judgments.csv`). **Still to do:** choose best / worst / near-miss for the report
 - [ ] Phase 3: probe set, findings CSV (not started)
 - [ ] Phase 4: intervention and re-evaluation (not started)
 - [ ] Final report, AI-use log, handwritten reflection (due Oct 30)
