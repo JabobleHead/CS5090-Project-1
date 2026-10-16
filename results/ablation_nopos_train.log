@@ -1,0 +1,244 @@
+/kaggle/working/repo/nanogpt/train.py:199: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = torch.cuda.amp.GradScaler(enabled=(dtype == 'float16'))
+Overriding config with configs/ablation_nopos.py:
+# Ablation: identical to baseline EXCEPT learned position embeddings are removed. Run from repo root:
+#   python nanogpt/train.py configs/ablation_nopos.py
+exec(open('configs/baseline.py').read())
+out_dir = 'out-ablation-nopos'
+log_csv = 'results/ablation_nopos_loss.csv'
+use_pos_emb = False         # the ONE change
+
+Overriding: compile = False
+tokens per iteration will be: 32,768
+found vocab_size = 8192 (inside data/code/meta.pkl)
+Initializing a new model from scratch
+number of parameters: 13.77M
+num decayed parameter tensors: 25, with 13,762,560 parameters
+num non-decayed parameter tensors: 13, with 4,992 parameters
+using fused AdamW: True
+step 0: train loss 9.0496, val loss 9.0499
+iter 0: loss 9.0662, time 7717.45ms, mfu -100.00%
+iter 50: loss 6.2056, time 272.15ms, mfu 3.73%
+iter 100: loss 5.3135, time 283.73ms, mfu 3.72%
+iter 150: loss 4.7064, time 273.51ms, mfu 3.72%
+iter 200: loss 4.5064, time 267.43ms, mfu 3.73%
+iter 250: loss 4.2374, time 267.67ms, mfu 3.73%
+step 300: train loss 4.1194, val loss 4.1910
+saving checkpoint to out-ablation-nopos
+iter 300: loss 4.0836, time 8121.66ms, mfu 3.37%
+iter 350: loss 4.1662, time 273.62ms, mfu 3.41%
+iter 400: loss 3.8240, time 273.60ms, mfu 3.44%
+iter 450: loss 3.5432, time 273.05ms, mfu 3.47%
+iter 500: loss 3.4717, time 271.76ms, mfu 3.49%
+iter 550: loss 3.4913, time 267.84ms, mfu 3.52%
+step 600: train loss 3.2494, val loss 3.3355
+saving checkpoint to out-ablation-nopos
+iter 600: loss 3.3008, time 8232.20ms, mfu 3.18%
+iter 650: loss 3.2529, time 272.31ms, mfu 3.24%
+iter 700: loss 3.2798, time 274.07ms, mfu 3.29%
+iter 750: loss 3.0615, time 269.06ms, mfu 3.33%
+iter 800: loss 3.0575, time 266.51ms, mfu 3.38%
+iter 850: loss 2.9450, time 269.43ms, mfu 3.42%
+step 900: train loss 2.7149, val loss 2.7908
+saving checkpoint to out-ablation-nopos
+iter 900: loss 2.9103, time 8239.32ms, mfu 3.09%
+iter 950: loss 2.7374, time 271.05ms, mfu 3.16%
+iter 1000: loss 2.8029, time 271.65ms, mfu 3.22%
+iter 1050: loss 2.7808, time 268.64ms, mfu 3.27%
+iter 1100: loss 2.7300, time 270.89ms, mfu 3.32%
+iter 1150: loss 2.5819, time 273.33ms, mfu 3.36%
+step 1200: train loss 2.3734, val loss 2.4485
+saving checkpoint to out-ablation-nopos
+iter 1200: loss 2.5614, time 8240.96ms, mfu 3.04%
+iter 1250: loss 2.6019, time 269.58ms, mfu 3.11%
+iter 1300: loss 2.6024, time 270.63ms, mfu 3.17%
+iter 1350: loss 2.6068, time 268.33ms, mfu 3.24%
+iter 1400: loss 2.3681, time 269.20ms, mfu 3.29%
+iter 1450: loss 2.4839, time 274.17ms, mfu 3.33%
+step 1500: train loss 2.2396, val loss 2.3284
+saving checkpoint to out-ablation-nopos
+iter 1500: loss 2.4944, time 8239.86ms, mfu 3.01%
+iter 1550: loss 2.5357, time 271.42ms, mfu 3.08%
+iter 1600: loss 2.3681, time 267.06ms, mfu 3.16%
+iter 1650: loss 2.4284, time 267.43ms, mfu 3.22%
+iter 1700: loss 2.3776, time 266.65ms, mfu 3.28%
+iter 1750: loss 2.2482, time 268.22ms, mfu 3.33%
+step 1800: train loss 2.1649, val loss 2.2539
+saving checkpoint to out-ablation-nopos
+iter 1800: loss 2.2634, time 8246.41ms, mfu 3.01%
+iter 1850: loss 2.2997, time 270.20ms, mfu 3.08%
+iter 1900: loss 2.2078, time 271.89ms, mfu 3.15%
+iter 1950: loss 2.2582, time 268.49ms, mfu 3.21%
+iter 2000: loss 2.2945, time 272.18ms, mfu 3.27%
+iter 2050: loss 2.1960, time 271.27ms, mfu 3.31%
+step 2100: train loss 2.0544, val loss 2.1686
+saving checkpoint to out-ablation-nopos
+iter 2100: loss 2.2260, time 8262.08ms, mfu 2.99%
+iter 2150: loss 2.3096, time 272.27ms, mfu 3.07%
+iter 2200: loss 2.1967, time 272.58ms, mfu 3.13%
+iter 2250: loss 2.2106, time 269.59ms, mfu 3.20%
+iter 2300: loss 2.2430, time 268.84ms, mfu 3.26%
+iter 2350: loss 2.1649, time 271.98ms, mfu 3.30%
+step 2400: train loss 2.0255, val loss 2.1167
+saving checkpoint to out-ablation-nopos
+iter 2400: loss 2.1894, time 8264.81ms, mfu 2.99%
+iter 2450: loss 2.0959, time 270.28ms, mfu 3.06%
+iter 2500: loss 2.2463, time 273.72ms, mfu 3.13%
+iter 2550: loss 2.2898, time 269.75ms, mfu 3.19%
+iter 2600: loss 2.0356, time 273.80ms, mfu 3.24%
+iter 2650: loss 2.1413, time 271.83ms, mfu 3.29%
+step 2700: train loss 1.9823, val loss 2.0714
+saving checkpoint to out-ablation-nopos
+iter 2700: loss 2.1098, time 8262.76ms, mfu 2.98%
+iter 2750: loss 2.1558, time 273.76ms, mfu 3.05%
+iter 2800: loss 1.9673, time 268.69ms, mfu 3.12%
+iter 2850: loss 2.1194, time 268.40ms, mfu 3.19%
+iter 2900: loss 2.1937, time 270.85ms, mfu 3.25%
+iter 2950: loss 2.0346, time 272.35ms, mfu 3.29%
+step 3000: train loss 1.9364, val loss 2.0473
+saving checkpoint to out-ablation-nopos
+iter 3000: loss 2.2429, time 8248.28ms, mfu 2.98%
+iter 3050: loss 2.0698, time 273.26ms, mfu 3.05%
+iter 3100: loss 2.1375, time 272.16ms, mfu 3.12%
+iter 3150: loss 2.1038, time 271.11ms, mfu 3.18%
+iter 3200: loss 2.0005, time 270.63ms, mfu 3.24%
+iter 3250: loss 2.0049, time 272.26ms, mfu 3.29%
+step 3300: train loss 1.9159, val loss 2.0172
+saving checkpoint to out-ablation-nopos
+iter 3300: loss 1.9357, time 8241.59ms, mfu 2.97%
+iter 3350: loss 1.9955, time 272.69ms, mfu 3.05%
+iter 3400: loss 1.9995, time 270.82ms, mfu 3.12%
+iter 3450: loss 2.0301, time 267.69ms, mfu 3.19%
+iter 3500: loss 1.9679, time 272.18ms, mfu 3.24%
+iter 3550: loss 2.0190, time 267.78ms, mfu 3.30%
+step 3600: train loss 1.9068, val loss 2.0031
+saving checkpoint to out-ablation-nopos
+iter 3600: loss 2.1685, time 8238.34ms, mfu 2.98%
+iter 3650: loss 1.9915, time 268.85ms, mfu 3.06%
+iter 3700: loss 2.1097, time 267.04ms, mfu 3.13%
+iter 3750: loss 2.0047, time 271.88ms, mfu 3.19%
+iter 3800: loss 1.9931, time 269.77ms, mfu 3.25%
+iter 3850: loss 1.9893, time 268.26ms, mfu 3.31%
+step 3900: train loss 1.8405, val loss 1.9472
+saving checkpoint to out-ablation-nopos
+iter 3900: loss 1.9759, time 8254.22ms, mfu 2.99%
+iter 3950: loss 2.0555, time 272.26ms, mfu 3.06%
+iter 4000: loss 1.9566, time 267.97ms, mfu 3.13%
+iter 4050: loss 1.8705, time 268.36ms, mfu 3.20%
+iter 4100: loss 1.9713, time 269.65ms, mfu 3.26%
+iter 4150: loss 1.9625, time 269.79ms, mfu 3.31%
+step 4200: train loss 1.8311, val loss 1.9301
+saving checkpoint to out-ablation-nopos
+iter 4200: loss 1.8781, time 8263.64ms, mfu 2.99%
+iter 4250: loss 2.0303, time 268.70ms, mfu 3.07%
+iter 4300: loss 2.0889, time 271.22ms, mfu 3.14%
+iter 4350: loss 1.9774, time 270.67ms, mfu 3.20%
+iter 4400: loss 1.8621, time 268.58ms, mfu 3.26%
+iter 4450: loss 1.9796, time 272.65ms, mfu 3.30%
+step 4500: train loss 1.7891, val loss 1.9251
+saving checkpoint to out-ablation-nopos
+iter 4500: loss 1.9511, time 8237.67ms, mfu 2.99%
+iter 4550: loss 1.8540, time 270.71ms, mfu 3.06%
+iter 4600: loss 1.9334, time 268.56ms, mfu 3.13%
+iter 4650: loss 1.9800, time 271.90ms, mfu 3.20%
+iter 4700: loss 1.9406, time 272.21ms, mfu 3.25%
+iter 4750: loss 1.9917, time 273.51ms, mfu 3.30%
+step 4800: train loss 1.7674, val loss 1.8632
+saving checkpoint to out-ablation-nopos
+iter 4800: loss 1.9811, time 8255.26ms, mfu 2.98%
+iter 4850: loss 1.8328, time 268.29ms, mfu 3.06%
+iter 4900: loss 1.9218, time 271.55ms, mfu 3.13%
+iter 4950: loss 2.0162, time 272.81ms, mfu 3.19%
+iter 5000: loss 1.8536, time 268.18ms, mfu 3.25%
+iter 5050: loss 1.7669, time 273.70ms, mfu 3.29%
+step 5100: train loss 1.7376, val loss 1.8640
+saving checkpoint to out-ablation-nopos
+iter 5100: loss 1.8773, time 8245.09ms, mfu 2.98%
+iter 5150: loss 1.8037, time 268.87ms, mfu 3.06%
+iter 5200: loss 1.8895, time 268.47ms, mfu 3.13%
+iter 5250: loss 1.9189, time 269.83ms, mfu 3.19%
+iter 5300: loss 1.9592, time 272.61ms, mfu 3.25%
+iter 5350: loss 1.9157, time 271.77ms, mfu 3.30%
+step 5400: train loss 1.7357, val loss 1.8588
+saving checkpoint to out-ablation-nopos
+iter 5400: loss 1.8315, time 8242.28ms, mfu 2.98%
+iter 5450: loss 1.8215, time 272.23ms, mfu 3.05%
+iter 5500: loss 1.8289, time 269.91ms, mfu 3.13%
+iter 5550: loss 1.8770, time 273.23ms, mfu 3.18%
+iter 5600: loss 1.7730, time 268.02ms, mfu 3.25%
+iter 5650: loss 1.7167, time 268.56ms, mfu 3.30%
+step 5700: train loss 1.7016, val loss 1.8357
+saving checkpoint to out-ablation-nopos
+iter 5700: loss 1.8863, time 8249.05ms, mfu 2.98%
+iter 5750: loss 1.7875, time 272.93ms, mfu 3.06%
+iter 5800: loss 1.7232, time 267.43ms, mfu 3.13%
+iter 5850: loss 1.8841, time 273.87ms, mfu 3.19%
+iter 5900: loss 1.8637, time 269.16ms, mfu 3.25%
+iter 5950: loss 1.8955, time 266.08ms, mfu 3.30%
+step 6000: train loss 1.7096, val loss 1.8256
+saving checkpoint to out-ablation-nopos
+iter 6000: loss 1.8505, time 8256.05ms, mfu 2.99%
+iter 6050: loss 1.7792, time 269.89ms, mfu 3.06%
+iter 6100: loss 1.7210, time 272.06ms, mfu 3.13%
+iter 6150: loss 1.8863, time 272.52ms, mfu 3.19%
+iter 6200: loss 1.7502, time 268.07ms, mfu 3.25%
+iter 6250: loss 1.8002, time 272.41ms, mfu 3.30%
+step 6300: train loss 1.6898, val loss 1.7986
+saving checkpoint to out-ablation-nopos
+iter 6300: loss 1.7121, time 8246.06ms, mfu 2.98%
+iter 6350: loss 1.7688, time 272.05ms, mfu 3.06%
+iter 6400: loss 1.7475, time 270.60ms, mfu 3.13%
+iter 6450: loss 1.7753, time 269.85ms, mfu 3.19%
+iter 6500: loss 1.7113, time 270.79ms, mfu 3.25%
+iter 6550: loss 1.6894, time 269.85ms, mfu 3.30%
+step 6600: train loss 1.6575, val loss 1.8005
+saving checkpoint to out-ablation-nopos
+iter 6600: loss 1.8493, time 8254.10ms, mfu 2.98%
+iter 6650: loss 1.7603, time 271.63ms, mfu 3.06%
+iter 6700: loss 1.9494, time 270.82ms, mfu 3.13%
+iter 6750: loss 1.7463, time 271.35ms, mfu 3.19%
+iter 6800: loss 1.8474, time 272.26ms, mfu 3.24%
+iter 6850: loss 1.8437, time 275.03ms, mfu 3.29%
+step 6900: train loss 1.6778, val loss 1.7912
+saving checkpoint to out-ablation-nopos
+iter 6900: loss 1.7388, time 8253.46ms, mfu 2.97%
+iter 6950: loss 1.8034, time 270.96ms, mfu 3.05%
+iter 7000: loss 1.7974, time 269.14ms, mfu 3.12%
+iter 7050: loss 1.7592, time 267.39ms, mfu 3.19%
+iter 7100: loss 1.7569, time 266.30ms, mfu 3.25%
+iter 7150: loss 1.9083, time 266.63ms, mfu 3.31%
+step 7200: train loss 1.6596, val loss 1.7906
+saving checkpoint to out-ablation-nopos
+iter 7200: loss 1.7895, time 8262.93ms, mfu 2.99%
+iter 7250: loss 1.7483, time 271.68ms, mfu 3.07%
+iter 7300: loss 1.8333, time 269.89ms, mfu 3.14%
+iter 7350: loss 1.7117, time 272.11ms, mfu 3.20%
+iter 7400: loss 1.6959, time 272.70ms, mfu 3.25%
+iter 7450: loss 1.7265, time 272.36ms, mfu 3.30%
+step 7500: train loss 1.6289, val loss 1.7579
+saving checkpoint to out-ablation-nopos
+iter 7500: loss 1.8417, time 8267.34ms, mfu 2.98%
+iter 7550: loss 1.9561, time 270.90ms, mfu 3.06%
+iter 7600: loss 1.6015, time 271.14ms, mfu 3.13%
+iter 7650: loss 1.8087, time 272.44ms, mfu 3.19%
+iter 7700: loss 1.7658, time 271.71ms, mfu 3.24%
+iter 7750: loss 1.8372, time 270.44ms, mfu 3.29%
+step 7800: train loss 1.6411, val loss 1.7930
+saving checkpoint to out-ablation-nopos
+iter 7800: loss 1.6105, time 8259.70ms, mfu 2.98%
+iter 7850: loss 1.7442, time 271.93ms, mfu 3.05%
+iter 7900: loss 1.7485, time 272.00ms, mfu 3.12%
+iter 7950: loss 1.8486, time 272.44ms, mfu 3.18%
+iter 8000: loss 1.8112, time 267.04ms, mfu 3.24%
+iter 8050: loss 1.6573, time 268.05ms, mfu 3.30%
+step 8100: train loss 1.6354, val loss 1.7553
+saving checkpoint to out-ablation-nopos
+iter 8100: loss 1.6389, time 8248.06ms, mfu 2.98%
+iter 8150: loss 1.7481, time 270.22ms, mfu 3.06%
+iter 8200: loss 1.6594, time 268.81ms, mfu 3.13%
+iter 8250: loss 1.8438, time 271.58ms, mfu 3.19%
+iter 8300: loss 1.8855, time 268.20ms, mfu 3.25%
+iter 8350: loss 1.5418, time 270.74ms, mfu 3.30%
+step 8400: train loss 1.6462, val loss 1.7466
+saving checkpoint to out-ablation-nopos
+iter 8400: loss 1.8105, time 8245.09ms, mfu 2.98%
