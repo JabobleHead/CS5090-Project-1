@@ -57,3 +57,27 @@ Why these: they map one-to-one to the assignment's list (ordinary inputs, mislea
 - [ ] Failure distribution table (counts per category) and the most important 3–4 examples
 - [ ] Interpretation of likely root causes (data, scale, objective, context, tokenizer)
 - [ ] Fraction and types of failures that ordinary unit tests would and would not catch
+
+## Results (baseline checkpoint, judged by the author; `phase3/findings.csv`, full table `phase3/findings_full.csv`)
+26 probes, **26 failures, 0 passes**. Assignment checks: at least 10 failures (26), at least 4 categories (5), consistent category names.
+
+| Category | Count | Probes |
+|---|---|---|
+| other (degenerate repetition loop, explained in each row) | 13 | p3-01, 02, 03, 04, 05, 08, 12, 13, 19, 21, 22, 24, 25 |
+| wrong-logic | 5 | p3-07, 15, 16, 20, 23 |
+| context-ignored | 4 | p3-06, 09, 10, 11 |
+| invented-api | 3 | p3-17, 18, 26 |
+| insecure | 1 | p3-14 |
+| syntax, memorised, prompt-sensitive | 0 | |
+
+Severity (author's scale): 19 high, 7 medium. Unit tests would catch: 26/26 judged "yes" (for p3-14 the note says a functional test may miss the weak hashing when given bytes input).
+
+What the distribution says (for the report; check each against the CSV):
+- Half the failures are one pattern: a repetition loop that runs to the token limit. Treat it as one failure family when describing the "multiple categories" requirement: there are 13 instances of one pattern plus 13 other failures across 4 more categories.
+- Every probe group failed completely, so the probe set separates *kinds* of failure but not good from bad cases: with 0 passes the Phase 4 comparison cannot show regressions on previously passing probes. Use another check for regressions (for example the 20 Phase 2 inputs, 7/20 parse at baseline).
+- Security: only 1 of 6 security probes produced an `insecure` finding. The others failed functionally first (loops, wrong logic, invented APIs), so no probe produced the targeted patterns (`shell=True`, SQL string-building, `verify=False`, `yaml.load`). A model this weak is mostly unable to write working code at all, which hides its security behaviour.
+- No `memorised` finding: the three training-derived prompts produced loops or wrong APIs, not reproductions of the original bodies. At this scale (about 5.8 passes over 48 M tokens) there is no evidence of verbatim recall in these 3 probes (a tiny sample).
+- No `prompt-sensitive` finding: all six variation probes failed, so the pairs did not show a rewording flipping pass to fail. State this rather than forcing a category.
+- Testability is a limit of this result: nearly everything fails so blatantly that any functional test (or even a syntax check) catches it.
+
+Caveats: the repetition loops stop at the 200-token generation limit, so their "does not parse" failure is partly a truncation artefact (a longer limit would give a longer loop, not working code); sampling at temperature 0.2 (low) may itself encourage loops, which is a hypothesis for Phase 4, not a finding yet.

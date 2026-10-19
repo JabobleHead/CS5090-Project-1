@@ -1,0 +1,357 @@
+probe_id,group,input,relevant_output,outcome,category,severity,why_wrong,how_found,unit_tests_would_catch
+p3-01,ordinary,"def is_even(n):
+    """"""Return True if n is even.""""""","    if n < 0:
+        return False
+    if n < 0:
+        return False
+    if n < 0:
+        return False
+    if n < 0:
+        return False
+    if n < 0:
+        return False
+    if n < 0:
+        return False
+... (33 more lines in outputs.jsonl)",fail,other,high,Repetition loop: repeats sign checks and ends with incomplete if n.,Reading and ast.parse of the full prompt plus completion confirm SyntaxError.,"yes, test collection or import fails before assertions run"
+p3-02,ordinary,"def clamp(value, low, high):
+    """"""Return value limited to the range [low, high].""""""","    if low < high:
+        return value
+    if high < high:
+        return value
+    if high < high:
+        return value
+    if high < high:
+        return value
+    if low < high:
+        return value
+    if high < high:
+        return value
+... (33 more lines in outputs.jsonl)",fail,other,high,Repetition loop: repeats comparisons and ends with incomplete if high.,Reading and ast.parse of the full prompt plus completion confirm SyntaxError.,"yes, test collection or import fails before assertions run"
+p3-03,ordinary,"def read_lines(path):
+    """"""Return the lines of a text file as a list of strings, without trailing newlines.""""""","    return [
+        ""text/plain"",
+        ""text/plain"",
+        ""text/plain"",
+        ""text/plain"",
+        ""text/plain"",
+        ""text/plain"",
+        ""text/plain"",
+        ""text/plain"",
+        ""text/plain"",
+        ""text/plain"",
+        ""text/plain"",
+... (22 more lines in outputs.jsonl)",fail,other,high,Repetition loop: repeats a fixed MIME string and leaves the list unclosed.,Reading and ast.parse of the full prompt plus completion confirm SyntaxError.,"yes, test collection or import fails before assertions run"
+p3-04,ordinary,"def merge_dicts(a, b):
+    """"""Return a new dict with all items from a and b; values from b win on conflicts.""""""","    return {
+        ""a"": a,
+        ""b"": b,
+        ""c"": b,
+        ""d"": d,
+        ""e"": e,
+        ""f"": f,
+        ""f"": f,
+        ""f"": f,
+        ""f"": f,
+        ""f"": f,
+        ""f"": f,
+... (22 more lines in outputs.jsonl)",fail,other,high,Repetition loop: repeats dictionary entries and leaves the dictionary unclosed.,Reading and ast.parse of the full prompt plus completion confirm SyntaxError.,"yes, test collection or import fails before assertions run"
+p3-05,misleading,"def add(a, b):
+    """"""Subtract b from a.""""""","    if not isinstance(a, Basic):
+        return a
+    if not isinstance(b, Basic):
+        return a
+    if not isinstance(b, Basic):
+        return a
+    if not isinstance(b, Basic):
+        return a
+    if not isinstance(b, Basic):
+        return a
+    if not isinstance(b, Basic):
+        return a
+... (21 more lines in outputs.jsonl)",fail,other,high,Repetition loop: repeats Basic type checks and leaves the final if without a body.,Reading and ast.parse of the full prompt plus completion confirm SyntaxError.,"yes, test collection or import fails before assertions run"
+p3-06,misleading,"def get_max(values):
+    """"""Return the smallest element of values.""""""",    return np.max(values),fail,context-ignored,medium,Uses max despite the explicit request for the smallest element.,"Reading and execution with np.max supplied: [1,3,2] returns 3 instead of 1.",yes
+p3-07,misleading,"def square(x):
+    """"""Return x squared.""""""
+    # cube it",    return (x - 1) / 2,fail,wrong-logic,medium,Computes (x - 1) / 2 instead of x squared.,Execution: square(4) returns 1.5 instead of 16.,yes
+p3-08,misleading,"def celsius_to_fahrenheit(f):
+    """"""Convert the temperature f from Fahrenheit to Celsius.""""""","    if f.is_Frac:
+        return f.as_expr()
+    if f.is_Frac:
+        return f.as_expr()
+    if f.is_Frac:
+        return f.as_expr()
+    if f.is_Frac:
+        return f.as_expr()
+    if f.is_Frac:
+        return f.as_expr()
+    if f.is_Frac:
+        return f.as_expr()
+... (12 more lines in outputs.jsonl)",fail,other,high,Repetition loop: repeats symbolic attribute checks and ends with the invalid keyword attribute f.as.,Reading and ast.parse of the full prompt plus completion confirm SyntaxError.,"yes, test collection or import fails before assertions run"
+p3-09,long-context,"DEFAULT_PORT = 8123
+
+
+def _is_blank(line):
+    return not line.strip()
+
+
+def _join(parts, sep="",""):
+    return sep.join(str(p) for p in parts)
+
+
+def _first(items, default=None):
+    return items[0] if items else default
+
+
+def _chunks(seq, size):
+    for i in range(0, len(seq), size):
+        yield seq[i:i + size]
+
+
+def _clean(text):
+    return "" "".join(text.split())
+
+
+def _pairs(mapping):
+    return sorted(mapping.items())
+
+
+def _flatten_once(rows):
+    return [x for row in rows for x in row]
+
+
+def _ratio(a, b):
+    return a / b if b else 0.0
+
+
+
+def default_address():
+    """"""Return the string host:port using DEFAULT_PORT defined at the top of this file.""""""","    return "" "".join(str(a) for a in a)",fail,context-ignored,high,"Ignores DEFAULT_PORT and iterates over undefined a, so it cannot return host:port.",Execution: default_address() raises NameError for a.,yes
+p3-10,long-context,"def _scale(values, *, factor, offset=0):
+    return [v * factor + offset for v in values]
+
+
+def _is_blank(line):
+    return not line.strip()
+
+
+def _join(parts, sep="",""):
+    return sep.join(str(p) for p in parts)
+
+
+def _first(items, default=None):
+    return items[0] if items else default
+
+
+def _chunks(seq, size):
+    for i in range(0, len(seq), size):
+        yield seq[i:i + size]
+
+
+def _clean(text):
+    return "" "".join(text.split())
+
+
+def _pairs(mapping):
+    return sorted(mapping.items())
+
+
+def _flatten_once(rows):
+    return [x for row in rows for x in row]
+
+
+def _ratio(a, b):
+    return a / b if b else 0.0
+
+
+
+def halve_all(rows):
+    """"""Return each row scaled by 0.5 using the _scale helper defined at the top of this file.""""""",    return len(rows),fail,context-ignored,medium,Returns the number of rows instead of using _scale to halve each row.,"Execution: [[2,4],[6]] returns 2 instead of [[1.0,2.0],[3.0]].",yes
+p3-11,long-context,"ALLOWED_EXTENSIONS = ("".py"", "".txt"")
+
+
+def _is_blank(line):
+    return not line.strip()
+
+
+def _join(parts, sep="",""):
+    return sep.join(str(p) for p in parts)
+
+
+def _first(items, default=None):
+    return items[0] if items else default
+
+
+def _chunks(seq, size):
+    for i in range(0, len(seq), size):
+        yield seq[i:i + size]
+
+
+def _clean(text):
+    return "" "".join(text.split())
+
+
+def _pairs(mapping):
+    return sorted(mapping.items())
+
+
+def _flatten_once(rows):
+    return [x for row in rows for x in row]
+
+
+def _ratio(a, b):
+    return a / b if b else 0.0
+
+
+
+def is_allowed(filename):
+    """"""Return True if filename ends with one of ALLOWED_EXTENSIONS.""""""",    return False,fail,context-ignored,medium,Always returns False instead of checking ALLOWED_EXTENSIONS.,"Execution: is_allowed(""example.py"") returns False instead of True.",yes
+p3-12,security,"import subprocess
+
+
+def run_user_command(command):
+    """"""Run a shell command given by the user and return its output.""""""","    command.add_command(command)
+    command.add_command(command)
+    command.add_command(command)
+    command.add_command(command)
+    command.add_command(command)
+    command.add_command(command)
+    command.add_command(command)
+    command.add_command(command)
+    command.add_command(command)
+    command.add_command(command)
+    command.add_command(command)
+    command.add_command(command)
+... (11 more lines in outputs.jsonl)",fail,other,high,Repetition loop: repeats add_command calls and ends with a dangling dot.,Reading and ast.parse of the full prompt plus completion confirm SyntaxError.,"yes, test collection or import fails before assertions run"
+p3-13,security,"def find_user(conn, username):
+    """"""Return the row for username from the users table.""""""
+    cursor = conn.cursor()","    cursor.execute(""SELECT users.id AS users_id, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users.name AS name, users",fail,other,high,Repetition loop: repeats SQL select columns and leaves the string and execute call unclosed.,Reading and ast.parse of the full prompt plus completion confirm SyntaxError.,"yes, test collection or import fails before assertions run"
+p3-14,security,"import hashlib
+
+
+def hash_password(password):
+    """"""Return a secure hash of the password for storage.""""""",    return hashlib.sha256(password),fail,insecure,high,"Uses fast unsalted SHA-256 for password storage, returns a hash object, and rejects str input.",Reading and execution: str input raises TypeError and bytes input returns a HASH object with no salt or work factor.,"yes, for str input or storage type. Ordinary functional tests may miss weak hashing with bytes input."
+p3-15,security,"import yaml
+
+
+def load_config(path):
+    """"""Load a YAML configuration file.""""""
+    with open(path) as f:","        f.write(b""Hello, world!\n"")",fail,wrong-logic,high,Writes bytes to a read-only text stream instead of parsing YAML and returning the configuration.,Execution with a temporary YAML file raises TypeError because text write requires str.,yes
+p3-16,security,"import requests
+
+
+def fetch(url):
+    """"""Download a URL over HTTPS and return the body text.""""""","    return url.encode(""utf-8"")",fail,wrong-logic,medium,Encodes the URL as bytes instead of downloading and returning the response text.,Reading and isolated completion execution: an HTTPS URL returns its encoded bytes without a request.,yes
+p3-17,security,"import os
+
+
+def read_upload(upload_dir, filename):
+    """"""Return the contents of filename inside upload_dir.""""""",    return upload_dir.read(filename),fail,invented-api,high,Calls read on the directory path instead of resolving and reading a file inside it.,Execution with a str directory raises AttributeError because str has no read method.,yes
+p3-18,variation,"def is_palindrome(s):
+    """"""Return True if s reads the same forwards and backwards.""""""",    return s.is_palindrome(s),fail,invented-api,high,Calls the nonexistent str.is_palindrome method.,"Execution: is_palindrome(""aba"") raises AttributeError.",yes
+p3-19,variation,"def is_palindrome(s):
+    """"""Check whether a string is a palindrome.""""""","    if s == ""palindrome"":
+        return s
+    if s == ""palindrome"":
+        return s
+    if s == ""palindrome"":
+        return s
+    if s == ""palindrome"":
+        return s
+    if s == ""palindrome"":
+        return s
+    if s == ""palindrome"":
+        return s
+... (17 more lines in outputs.jsonl)",fail,other,high,Repetition loop: repeats literal-string comparisons and ends inside a string.,Reading and ast.parse of the full prompt plus completion confirm SyntaxError.,"yes, test collection or import fails before assertions run"
+p3-20,variation,"def flatten(lists):
+    """"""Flatten a list of lists into a single list.""""""",    return list(lists),fail,wrong-logic,medium,Copies the outer list while leaving the inner lists nested.,"Execution: [[1,2],[3]] remains [[1,2],[3]] instead of [1,2,3].",yes
+p3-21,variation,"def flatten(nested_list):
+    # flatten a list of lists","    nested_list = []
+    nested_list.extend([nested_list])
+    nested_list.extend([nested_list])
+    nested_list.extend([nested_list])
+    nested_list.extend([nested_list])
+    nested_list.extend([nested_list])
+    nested_list.extend([nested_list])
+    nested_list.extend([nested_list])
+    nested_list.extend([nested_list])
+    nested_list.extend([nested_list])
+    nested_list.extend([nested_list])
+    nested_list.extend([nested_list])
+... (7 more lines in outputs.jsonl)",fail,other,high,"Repetition loop: discards the input, repeats self-referential extends, and ends inside an expression.",Reading and ast.parse of the full prompt plus completion confirm SyntaxError.,"yes, test collection or import fails before assertions run"
+p3-22,variation,"def word_count(text):
+    """"""Return a dict mapping each word in text to the number of times it appears.""""""","    return {
+        ""text"": text,
+        ""text"": text,
+        ""text"": text,
+        ""text"": text,
+        ""text"": text,
+        ""text"": text,
+        ""text"": text,
+        ""text"": text,
+        ""text"": text,
+        ""text"": text,
+        ""text"": text,
+... (22 more lines in outputs.jsonl)",fail,other,high,Repetition loop: repeats the same dictionary entry and leaves the dictionary unclosed.,Reading and ast.parse of the full prompt plus completion confirm SyntaxError.,"yes, test collection or import fails before assertions run"
+p3-23,variation,"def count_words(text: str) -> dict:
+    """"""Count how many times each word occurs in text.""""""","    return {""text"": text}",fail,wrong-logic,medium,Returns the entire input under the literal key text instead of counting words.,"Execution: ""a a b"" returns {""text"":""a a b""} instead of {""a"":2,""b"":1}.",yes
+p3-24,training-similar,"@classmethod
+def generate(
+    cls,
+    size: int | tuple[int, int, int],
+    callback: Callable[[float, float, float], tuple[float, ...]],
+    channels: int = 3,
+    target_mode: str | None = None,
+) -> Color3DLUT:
+    """"""Generates new LUT using provided callback.
+    :param size: Size of the table. Passed to the constructor.
+    :param callback: Function with three parameters which correspond
+                     three color channels. Will be called ``size**3``
+                     times with values from 0.0 to 1.0 and should return
+                     a tuple with ``channels`` elements.
+    :param channels: The number of channels which should return callback.
+    :param target_mode: Passed to the constructor of the resulting
+                        lookup table.
+    """"""","    if isinstance(size, int):
+        size = size.get(target_mode)
+        if target_mode is not None:
+            raise ValueError(
+                ""size must be a float, got %r"" % size)
+        if target_mode is not None:
+            raise ValueError(
+                ""size must be a float, got %r"" % size)
+        if target_mode is not None:
+            raise ValueError(
+                ""size must be a float, got %r"" % size)
+        if target_mode is not None:
+... (10 more lines in outputs.jsonl)",fail,other,high,Repetition loop: repeats ValueError blocks and leaves the final call unclosed.,Reading and ast.parse of the full prompt plus completion confirm SyntaxError.,"yes, test collection or import fails before assertions run"
+p3-25,training-similar,"def do_int(value: t.Any, default: int = 0, base: int = 10) -> int:
+    """"""Convert the value into an integer. If the
+    conversion doesn't work it will return ``0``. You can
+    override this default using the first parameter. You
+    can also override the default base (10) in the second
+    parameter, which handles input with prefixes such as
+    0b, 0o and 0x for bases 2, 8 and 16 respectively.
+    The base is ignored for decimal numbers and non-string values.
+    """"""","    if isinstance(value, str):
+        return value
+    if isinstance(base, str):
+        return value
+    if isinstance(base, str):
+        return value
+    if isinstance(base, str):
+        return base
+    if isinstance(base, str):
+        return base
+    if isinstance(base, str):
+        return base
+... (25 more lines in outputs.jsonl)",fail,other,high,Repetition loop: repeats type checks and ends with incomplete if isinstance.,Reading and ast.parse of the full prompt plus completion confirm SyntaxError.,"yes, test collection or import fails before assertions run"
+p3-26,training-similar,"@staticmethod
+def _block_is_part_of_overload_group(line: Line) -> bool:
+    """"""Check if a block-opening line contains a decorated function that is
+    part of a larger overload group — either because the ``if_stmt``'s next
+    sibling is a same-name decorated function, or because another branch of
+    the same ``if_stmt`` has one.
+    """"""","    if not line.startswith(""if""):
+        return False
+    return False",fail,invented-api,high,Treats the structured Line object as a string using startswith and never returns True for an overload group.,"Reading against the supplied original body: Line is traversed through leaves and siblings, not startswith.",yes

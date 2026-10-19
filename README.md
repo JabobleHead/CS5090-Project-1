@@ -66,6 +66,6 @@ Not in git (rebuilt by the scripts): `data/raw/`, `data/processed/`, `data/code/
 - [x] Baseline trained on Kaggle (T4, ~40 min): final val loss **1.7128**, train 1.551; `results/baseline_loss.csv`, `results/loss_curves.png`
 - [x] Ablation trained and compared: final val loss 1.7466 vs baseline 1.7128 (+0.034, prediction was +0.03 to +0.15); generations and an indentation probe in `results/` and [docs/phase1.md](docs/phase1.md) section 8. **Still to write:** the lesson, in your own words
 - [x] Phase 2: 20 outputs generated and judged by hand: 0 accept / 0 edit / 20 reject (`phase2/judgments.csv`). **Still to do:** choose best / worst / near-miss for the report
-- [ ] Phase 3: 26 probes built and run on the baseline (`phase3/`, see [docs/phase3.md](docs/phase3.md)). **Next:** judge each probe and fill `phase3/findings.csv` (>= 10 failures, 4+ categories)
+- [x] Phase 3: 26 probes judged on the baseline: 26 fail / 0 pass; categories other 13 (repetition loops), wrong-logic 5, context-ignored 4, invented-api 3, insecure 1 (`phase3/findings.csv`, [docs/phase3.md](docs/phase3.md)). **Next:** Phase 4
 - [ ] Phase 4: intervention and re-evaluation (not started)
 - [ ] Final report, AI-use log, handwritten reflection (due Oct 30)
