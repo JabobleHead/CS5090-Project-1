@@ -1,0 +1,144 @@
+### a - b (seed 1)
+x = a - b)**2
+    assert ccode(ccode(z)) == 'z'
+    assert ccode(z) == 'z'
+
+    assert ccode(z) == 'z'
+    assert ccode(z) == 'z'
+    assert ccode(z) == 'z'
+
+    assert ccode(z, 'z') == 'z'
+    assert ccode(z
+
+### a - b (seed 2)
+x = a - b**2
+    assert _test_args(2*I*pi*x + b - c**2*pi*x, a, b, x)
+
+
+def test_expand_poly():
+    a = Symbol('a', real=True)
+    b = Symbol('b')
+    assert _test_args(x*y*x)
+    assert _test_args(
+
+### a - b (seed 3)
+x = a - b + c
+    return a * b
+
+
+@_tracking_matrix
+def _do_squares_decomposition(a, b):
+    """Compute the decomposition of the power of a.
+
+    A has shape (n, n) or (n, n)
+    """
+    # compute the squares equation (represented as coefficients)
+    if a.is_zero:
+
+### b - a (seed 1)
+x = b - a
+        # Missing source code
+        if path_name != "README":
+            # For a full source code, the source code is the same as the
+            # source code.
+            source_code = urllib.parse.urlencode(source_code)
+            return source_code
+        # Missing source code
+        source_code = self.getsource(source_code
+
+### b - a (seed 2)
+x = b - a + b * I + a
+    assert R.dup_degree_by_dup(f, (0, K), F) == (G, K)
+
+
+def test_dmp_zero_gcd():
+    assert R.dmp_zero_gcd(f, 2) == (F, 0)
+
+    f = 2*x**2 + 15*x**2 + 16
+
+### b - a (seed 3)
+x = b - a + b - b - b)
+        if is_sequence(b, n):
+            return a*b**2 + b**2
+        if is_sequence(b, n):
+            return a*(b**2 + n).is_sequence(b, n)
+        if is_sequence(b, n):
+            return b + a*b + b
+        if is_sequence
+
+### nested indentation (seed 1)
+for i in range(3):
+    for j in range(3):
+        if i == j:
+            raise ValueError(f"Cannot find {i} for {i!r} for {j!r}")
+    for i in range(4):
+        if j == j:
+            if len(i) == 0:
+                break
+
+    # this is an error
+    # If we have two cases
+    for i in range(1, -1):
+        if len(i) == 1:
+
+### nested indentation (seed 2)
+for i in range(3):
+    for j in range(3):
+        if i == j:
+            yield (i, j)
+    assert list(itertools.chain(itertools.chain(itertools.chain(itertools.chain(*[len(i) for i in j) for j in i])))) == [
+        [i + 1, i + 4, i + 1, i + 4, i + 2, i]
+    ]
+    for i in range(3
+
+### nested indentation (seed 3)
+for i in range(3):
+    for j in range(3):
+        if i == j:
+            continue
+        if j == 0:
+            continue
+        k = int(k)
+        for j in range(0, 2):
+            if j == j:
+                continue
+        for j in range(k+1, k+1):
+            if j == 0:
+                continue
+        if j % 2 == j:
+            continue
+        k *= int(k)
+        for j in range(1
+
+### call with several positional args (seed 1)
+result = compute(p, p, p=p, p_tol=p_tol)
+    x0 = x0
+    for i in range(p_tol, x0):
+        x1 = np.linalg.norm(x)
+        r = p - p_tol
+        if p < 0:
+            f_i = p_tol + x0
+        u = f0
+        if p
+
+### call with several positional args (seed 2)
+result = compute(f, a, b, a, b, b, c, d, d, e, f, c, a, b, d, e, f)
+    assert_array_almost_equal(f, a, b, c, d, e, f)
+
+
+def test_gh_119_bare():
+    n = 15
+    a = np.arange
+
+### call with several positional args (seed 3)
+result = compute(func, values=values, **kwargs)
+
+            return func(func, values=values, **kwargs)
+
+        return func.ewm(func, values=values, **kwargs)
+
+    def _ewm_func(self, func):
+        return func.ewm(func, values=values, **kwargs)
+
+    def _ewm_func(self, func):
+        return

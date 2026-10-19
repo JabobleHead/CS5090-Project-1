@@ -1,0 +1,159 @@
+### a - b (seed 1)
+x = a - b*x
+    >>> c = x - y - c
+    >>> f = x**2 - 2*x
+    >>> f.subs(x, 2)
+    f
+    2
+    >>> f.subs(x, 2)
+    4*x*y - 1/x
+
+    >>> f.subs(a, 2)
+    f.subs(x, 2)
+
+    >>> f.subs
+
+### a - b (seed 2)
+x = a - b*a + b + c
+    assert limit(x**2 + 2, x, order='x') == x**2
+    assert limit(x**2 + 1, x, order='x') == x**3
+    assert limit(x**2 + 1, x, order='x') == x**2 + 2*x**2 + 15*x**2 + 16
+
+### a - b (seed 3)
+x = a - b + c
+    >>> q = f(x)
+    >>> q
+    x**5/4 + x**2/5/4 - 4*x**6/4 + x**2/4 - 4*x**2/4 - 4*x**2/4 - 4*x**2/4 - 4
+    >>> q
+    x**2/5/6 + x
+
+### b - a (seed 1)
+x = b - a*x
+    >>> c = x - y - c
+    >>> f = x**2 - 2*x
+    >>> f.subs(x, 2)
+    f
+    2
+    >>> f.subs(x, 2)
+    4*x*y - 1/x
+
+    >>> f.subs(a, 2)
+    f.subs(x, 2)
+
+    >>> f.subs
+
+### b - a (seed 2)
+x = b - a*x**2 + b**2
+
+    s = f(x + 1)
+    assert s == c
+    assert s == _c1*x**2 + 1
+    assert s == c**2 + 1
+
+    s1 = c + 1
+    s2 = c + 1
+    s3 = c + 2
+    s4 = c + 4*x**2 + 1
+    s
+
+### b - a (seed 3)
+x = b - a + c
+    >>> q = b - c
+    >>> x
+    array([ 1/2 + 3*b**2 + 3*c**4 + 3*c**2 - 1/2, 2*b**2 - 3*c**4 + 1/2 - 1/2])
+
+    """
+    if len(c) < 2 or c[-1] != '+1
+
+### nested indentation (seed 1)
+for i in range(3):
+    for j in range(3):
+        if i == j:
+            a = i - j
+            break
+    return a, i + b
+
+
+def _solve_for_update_for_update_for_update_for_update_for_update_for_update_for_update_for_update_for_for_update_for_for_update_for_for_update_for_update_for_for_update_
+
+### nested indentation (seed 2)
+for i in range(3):
+    for j in range(3):
+        if i == j:
+            if j == j + 1:
+                # Try to add a new i to j in the loop since the j is reachable
+                # on i in a j
+                    i += 2
+                if j + 1 < j:
+                    i += 1
+                elif j == j + 1:
+                    i += 1
+                    i -= 1
+                if i < n and i - i == 1:
+                   
+
+### nested indentation (seed 3)
+for i in range(3):
+    for j in range(3):
+        if i == j:
+            continue
+        if j == j:
+            continue
+        k = j
+        if k != j:
+            continue
+        if k == j:
+            k = j
+        elif k / j - j[j:] == j:
+            continue
+        else:
+            k = j
+            continue
+        if k == j:
+            continue
+        if k == j:
+            i = j + k
+        else:
+            continue
+
+### call with several positional args (seed 1)
+result = compute(p, q, p=q, p=q)
+    if not isinstance(q, np.ndarray):
+        raise ValueError("Incompatible PDF matrix")
+    if p is None:
+        raise ValueError("Incompatible PDF matrix")
+    if q is None:
+        raise ValueError("Incompatible PDF matrix")
+    p = q
+    if n_features > 0:
+        raise ValueError
+
+### call with several positional args (seed 2)
+result = compute(t, axis, result_type="numeric")
+        if axis != axis:
+            raise ValueError("`axis` must be one of the result")
+        return result_type, None
+
+    return result
+
+
+class Correlational(Correlational):
+    r"""Correlational power series coefficients with Correlational power series of Correlational
+
+    .. math::
+
+       
+
+### call with several positional args (seed 3)
+result = compute(df, result, axis=None, keepdims=False)
+    else:
+        # Note: this is a new copy
+        result = np.empty(rows)
+        if result is None:
+            result.flags.writeable = True
+        else:
+            result.flags.writeable = True
+
+    if result.flags.writeable:
+        result = result.flags.writeable
+        return

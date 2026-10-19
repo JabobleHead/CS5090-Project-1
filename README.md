@@ -7,6 +7,9 @@ A GPT-style code model trained from scratch (6 layers / 6 heads / 384 emb, conte
 |---|---|
 | [docs/phase1.md](docs/phase1.md) | Model/data/training choices, concepts, ablation procedure, reading loss curves, limitations |
 | [docs/kaggle_guide.md](docs/kaggle_guide.md) | Step-by-step GPU training on Kaggle (baseline and ablation), troubleshooting |
+| [docs/phase4.md](docs/phase4.md) | Phase 4 procedure (decoding intervention) and what to re-judge |
+| [PHASE4_HYPOTHESIS.md](PHASE4_HYPOTHESIS.md) | Phase 4 hypothesis and predictions (draft until committed) |
+| [docs/phase3.md](docs/phase3.md) | Probe-set design, how to judge and fill the findings CSV |
 | [docs/phase2.md](docs/phase2.md) | Code-completion task protocol, accept/edit/reject definitions, report checklist |
 | [docs/report_outline.md](docs/report_outline.md) | Final report structure, what's done/pending, repo checklist |
 | [docs/ai_use_log.md](docs/ai_use_log.md) | AI-use log (add your own entries) |
@@ -38,6 +41,9 @@ python scripts/make_phase2_inputs.py                  # -> phase2/inputs.jsonl, 
 python scripts/run_phase2.py --ckpt out-baseline/ckpt.pt
 #   ...judge each output by hand in phase2/judgments.csv...
 python scripts/phase2_summary.py
+# Phase 3: probes (see docs/phase3.md)
+python scripts/make_phase3_probes.py                       # -> phase3/probes.jsonl
+python scripts/run_phase3.py --ckpt out-baseline/ckpt.pt   # -> phase3/outputs.jsonl, review.md, findings.csv (created once)
 ```
 Seed 1337 throughout. Run all commands from the repository root.
 
@@ -60,8 +66,8 @@ Not in git (rebuilt by the scripts): `data/raw/`, `data/processed/`, `data/code/
 - [x] Ablation prediction written and committed
 - [x] Phase 2 inputs generated (20 functions from 20 repos); runner and summary dry-run tested
 - [x] Baseline trained on Kaggle (T4, ~40 min): final val loss **1.7128**, train 1.551; `results/baseline_loss.csv`, `results/loss_curves.png`
-- [ ] Ablation trained and compared (val loss + side-by-side generation) <- **next step**: rerun the notebook with `RUN='ablation_nopos'` (see [docs/kaggle_guide.md](docs/kaggle_guide.md))
+- [x] Ablation trained and compared: final val loss 1.7466 vs baseline 1.7128 (+0.034, prediction was +0.03 to +0.15); generations and an indentation probe in `results/` and [docs/phase1.md](docs/phase1.md) section 8. **Still to write:** the lesson, in your own words
 - [x] Phase 2: 20 outputs generated and judged by hand: 0 accept / 0 edit / 20 reject (`phase2/judgments.csv`). **Still to do:** choose best / worst / near-miss for the report
-- [ ] Phase 3: probe set, findings CSV (not started)
-- [ ] Phase 4: intervention and re-evaluation (not started)
+- [x] Phase 3: 26 probes judged on the baseline: 26 fail / 0 pass; categories other 13 (repetition loops), wrong-logic 5, context-ignored 4, invented-api 3, insecure 1 (`phase3/findings.csv`, [docs/phase3.md](docs/phase3.md)). **Next:** Phase 4 (see [docs/phase4.md](docs/phase4.md))
+- [ ] Phase 4: tooling built (`scripts/decoding.py`, `phase4_compare.py`); control run reproduces the baseline 26/26. **Waiting on:** you editing and committing `PHASE4_HYPOTHESIS.md`, then the runs
 - [ ] Final report, AI-use log, handwritten reflection (due Oct 30)
