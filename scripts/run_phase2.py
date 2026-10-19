@@ -12,6 +12,7 @@ from tokenizers import Tokenizer
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "nanogpt"))
 from model import GPT, GPTConfig  # noqa: E402
+from decoding import generate  # noqa: E402
 
 
 def cut_completion(text: str) -> str:
@@ -40,6 +41,7 @@ def main():
     ap.add_argument("--temperature", type=float, default=0.2)
     ap.add_argument("--top_k", type=int, default=50)
     ap.add_argument("--seed", type=int, default=1337)
+    ap.add_argument("--no_repeat_ngram", type=int, default=0, help="Phase 4 intervention (0 = baseline decoding)")
     ap.add_argument("--no_indent_fix", dest="indent_fix", action="store_false", help="end prompt at a bare newline (first, flawed attempt)")
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     a = ap.parse_args()
@@ -63,8 +65,7 @@ def main():
             indent = first[:len(first) - len(first.lstrip())]
             lead = indent[:-1] if a.indent_fix else ""
             ids = torch.tensor([tok.encode(r["prompt"] + lead).ids], dtype=torch.long, device=a.device)
-            with torch.no_grad():
-                gen = model.generate(ids, a.max_new_tokens, temperature=a.temperature, top_k=a.top_k)[0].tolist()
+            gen = generate(model, ids, a.max_new_tokens, temperature=a.temperature, top_k=a.top_k, no_repeat_ngram=a.no_repeat_ngram)[0].tolist()
             new = gen[ids.size(1):]
             if eot in new:
                 new = new[:new.index(eot)]
@@ -73,7 +74,7 @@ def main():
                    # an empty completion must not count: a signature+docstring alone is already valid Python
                    "parses": bool(completion.strip()) and parses(r["prompt"] + completion),
                    "settings": {"temperature": a.temperature, "top_k": a.top_k, "max_new_tokens": a.max_new_tokens,
-                                "seed": a.seed + i, "ckpt": a.ckpt, "indent_fix": a.indent_fix}}
+                                "seed": a.seed + i, "ckpt": a.ckpt, "indent_fix": a.indent_fix, "no_repeat_ngram": a.no_repeat_ngram}}
             f.write(json.dumps(rec) + "\n")
             print(f"{r['id']}: parses={rec['parses']} ({len(completion.splitlines())} lines)")
 

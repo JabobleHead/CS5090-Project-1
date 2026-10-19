@@ -7,7 +7,7 @@ Hints (NOT verdicts): `parses`, `security_flags` (regex patterns that often indi
 `verbatim_lines` (completion lines of >= 25 chars that occur as full lines in the training split) and, for
 training-derived probes, `ref_similarity` to the original body. phase3/findings.csv is created once (never overwritten).
 """
-import argparse, csv, difflib, json, re, sys
+import argparse, csv, difflib, json, re, sys, time
 from pathlib import Path
 import torch
 from tokenizers import Tokenizer
@@ -17,6 +17,7 @@ sys.path.insert(0, str(ROOT / "nanogpt"))
 sys.path.insert(0, str(ROOT / "scripts"))
 from model import GPT, GPTConfig  # noqa: E402
 from run_phase2 import cut_completion, parses  # noqa: E402
+from decoding import generate  # noqa: E402
 
 P3 = ROOT / "phase3"
 SECURITY_PATTERNS = {
@@ -48,6 +49,7 @@ def main():
     ap.add_argument("--temperature", type=float, default=0.2)
     ap.add_argument("--top_k", type=int, default=50)
     ap.add_argument("--seed", type=int, default=1337)
+    ap.add_argument("--no_repeat_ngram", type=int, default=0, help="Phase 4 intervention: forbid repeating any n-token window (0 = off = baseline decoding)")
     ap.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     a = ap.parse_args()
     suffix = f"_{a.tag}" if a.tag else ""
@@ -65,21 +67,28 @@ def main():
         torch.manual_seed(a.seed + i)
         lead = p["indent"][:-1]  # tokenizer-boundary fix (see docs/phase2.md)
         ids = torch.tensor([tok.encode(p["prompt"] + lead).ids], dtype=torch.long, device=a.device)
-        with torch.no_grad():
-            gen = model.generate(ids, a.max_new_tokens, temperature=a.temperature, top_k=a.top_k)[0].tolist()
+        t0 = time.time()
+        gen = generate(model, ids, a.max_new_tokens, temperature=a.temperature, top_k=a.top_k, no_repeat_ngram=a.no_repeat_ngram)[0].tolist()
+        secs = time.time() - t0
         new = gen[ids.size(1):]
-        if eot in new:
+        hit_eot = eot in new
+        if hit_eot:
             new = new[:new.index(eot)]
-        completion = cut_completion(lead + tok.decode(new))
+        raw = lead + tok.decode(new)
+        completion = cut_completion(raw)
+        ended = "eot" if hit_eot else ("dedent" if completion.rstrip() != raw.rstrip() else "limit")  # limit = ran to the token cap
+        lines = [l.strip() for l in completion.splitlines() if l.strip()]
+        repeat_ratio = round(1 - len(set(lines)) / len(lines), 3) if lines else 0.0
         rec = {"id": p["id"], "group": p["group"], "pair": p["pair"], "prompt": p["prompt"], "completion": completion,
                "parses": bool(completion.strip()) and parses(p["prompt"] + completion),
                "security_flags": security_flags(completion),
+               "ended": ended, "repeat_line_ratio": repeat_ratio, "gen_seconds": round(secs, 2),
                "settings": {"temperature": a.temperature, "top_k": a.top_k, "max_new_tokens": a.max_new_tokens,
-                            "seed": a.seed + i, "ckpt": a.ckpt}}
+                            "seed": a.seed + i, "ckpt": a.ckpt, "no_repeat_ngram": a.no_repeat_ngram}}
         if p.get("reference_body"):
             rec["ref_similarity"] = round(difflib.SequenceMatcher(None, p["reference_body"], completion).ratio(), 3)
         outs.append(rec)
-        print(f"{p['id']} [{p['group']}] parses={rec['parses']} flags={rec['security_flags']} {len(completion.splitlines())} lines")
+        print(f"{p['id']} [{p['group']}] parses={rec['parses']} ended={ended} repeat={repeat_ratio} flags={rec['security_flags']} {len(completion.splitlines())} lines")
 
     # verbatim-in-training check: one streaming pass over the train split
     cand = {}
@@ -112,7 +121,7 @@ def main():
         p = by_id[r["id"]]
         md.append(f"\n---\n\n## {r['id']}  [{p['group']}] {p['targets']}" + (f"   (pair {p['pair']})" if p["pair"] else "") + "\n")
         md.append(f"**A correct answer would:** {p['expect']}\n")
-        hint = f"parses: {r['parses']} | security-pattern flags: {r['security_flags'] or 'none'} | lines found verbatim in training: {r['verbatim_lines']}"
+        hint = f"parses: {r['parses']} | ended: {r['ended']} | security-pattern flags: {r['security_flags'] or 'none'} | lines found verbatim in training: {r['verbatim_lines']}"
         if "ref_similarity" in r:
             hint += f" | similarity to the original training body: {r['ref_similarity']}"
         md.append(f"*Hints (automatic, not verdicts):* {hint}\n")
