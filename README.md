@@ -69,5 +69,5 @@ Not in git (rebuilt by the scripts): `data/raw/`, `data/processed/`, `data/code/
 - [x] Ablation trained and compared: final val loss 1.7466 vs baseline 1.7128 (+0.034, prediction was +0.03 to +0.15); generations and an indentation probe in `results/` and [docs/phase1.md](docs/phase1.md) section 8. **Still to write:** the lesson, in your own words
 - [x] Phase 2: 20 outputs generated and judged by hand: 0 accept / 0 edit / 20 reject (`phase2/judgments.csv`). **Still to do:** choose best / worst / near-miss for the report
 - [x] Phase 3: 26 probes judged on the baseline: 26 fail / 0 pass; categories other 13 (repetition loops), wrong-logic 5, context-ignored 4, invented-api 3, insecure 1 (`phase3/findings.csv`, [docs/phase3.md](docs/phase3.md)). **Next:** Phase 4 (see [docs/phase4.md](docs/phase4.md))
-- [ ] Phase 4: tooling built (`scripts/decoding.py`, `phase4_compare.py`); control run reproduces the baseline 26/26. **Waiting on:** you editing and committing `PHASE4_HYPOTHESIS.md`, then the runs
+- [x] Phase 4: no-repeat 8-gram decoding rule, hypothesis committed first. Loops 13 -> 4 of 26, parses 13 -> 21, **passes 0 -> 0**; loops mostly became wrong-logic ([docs/phase4.md](docs/phase4.md))
 - [ ] Final report, AI-use log, handwritten reflection (due Oct 30)
